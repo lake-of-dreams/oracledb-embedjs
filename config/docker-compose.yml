@@ -1,0 +1,19 @@
+services:
+  db:
+    image: "container-registry.oracle.com/database/free:latest"
+    restart: "unless-stopped"
+    ports:
+      - 1521:1521
+    environment:
+      - "ORACLE_PWD=oracle"
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - 7869:11434
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: always
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_HOST=0.0.0.0
